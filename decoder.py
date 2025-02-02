@@ -15,7 +15,7 @@ def godal_to_code(label, instruct, variable):
 
     # Create List of Labels
     label_list = ['']
-    for i in range(1, label+2):
+    for i in range(1, label+3):
         label_list.append(f'A{i}')
         label_list.append(f'B{i}')
         label_list.append(f'C{i}')
@@ -24,7 +24,7 @@ def godal_to_code(label, instruct, variable):
 
     # Create List of Labels
     variable_list = ['Y']
-    for i in range(1, variable+2):
+    for i in range(1, variable+3):
         variable_list.append(f'X{i}')
         variable_list.append(f'Z{i}')
 
@@ -53,6 +53,7 @@ def decoding(inp):
     list_godel_number = []
     list_program = []
     for number in inp.split(" "):
+        print("DEBUG: ", number)
         number = eval(number)
         a, y = godal_numbers(number)
         b, c = godal_numbers(y)

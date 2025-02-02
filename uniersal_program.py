@@ -1,16 +1,23 @@
 from decoder import decoding
 
 
-def find_variable(programs):
+def find_variable(programs, inp_var):
     lst_x = []
     lst_z = []
     for program in programs:
         if program.find('X') != -1:
             lst_x.append(eval(program[program.find('X')+1]))
+            lst_x_var = [0] * max(lst_x)
         elif program.find('Z') != -1:
             lst_z.append(eval(program[program.find('Z') + 1]))
-    lst_x_var = [0] * max(lst_x)
-    lst_z_var = [0] * max(lst_z)
+            lst_z_var = [0] * max(lst_z)
+        else:
+            lst_x_var = [0]*len(inp_var)
+            if 'lst_z_var' not in locals():
+                lst_z_var = []
+
+            return lst_x_var, lst_z_var
+
     return lst_x_var, lst_z_var
 
 def find_label(programs):
@@ -64,8 +71,9 @@ def label_couner(program_line, lst_label):
 
 if __name__ == "__main__":
     # inp = str(input("input number: "))
-    inp_program = "45 34 350 2 46"
-    inp_var = "2 1"
+    inp_program = input("program number: ")
+    inp_var = input("input variable: ")
+
     lst_inpt_var = inp_var.split(" ")
 
     list_godal_number, list_program = decoding(inp_program)
@@ -78,7 +86,7 @@ if __name__ == "__main__":
     for idx, item in enumerate(list_godal_number):
         dict_godal_number[idx+1] = item
 
-    lst_x_var, lst_z_var = find_variable(list_program)
+    lst_x_var, lst_z_var = find_variable(list_program, inp_var)
     lst_label = find_label(list_program)
 
     Y = 0
